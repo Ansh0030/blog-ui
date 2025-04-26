@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./comp.css";
-import { login, register } from "./service";
+import { checkLogin, login, register } from "./service";
 import { useNavigate } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi2";
 
@@ -10,6 +10,13 @@ export default function LoginPage({ onLogin }) {
     username: "",
     password: "",
   });
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await checkLogin();
+  //   };
+  //   fetchData();
+  // }, []);
 
   const [signupCred, setSignupCred] = useState({
     username: "",

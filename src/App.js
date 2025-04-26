@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./Components/LoginPage";
 import ProfielPage from "./Components/ProfilePage";
 import { useState } from "react";
@@ -8,7 +8,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleLogin = () => {
-    setIsLoggedIn(true); // Simulate successful login
+    setIsLoggedIn(true);
   };
 
   return (
@@ -22,6 +22,7 @@ function App() {
               isLoggedIn ? <ProfielPage /> : <LoginPage onLogin={handleLogin} />
             }
           />
+          <Route path="*" element={<LoginPage onLogin={handleLogin} />} />
         </Routes>
       </div>
     </Router>
