@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./comp.css";
-import { checkLogin, login, register } from "./service";
+import { checkAndLoginWithToken, checkLogin, login, register } from "./service";
 import { useNavigate } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi2";
 
@@ -11,12 +11,16 @@ export default function LoginPage({ onLogin }) {
     password: "",
   });
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     await checkLogin();
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const autoLogin = async () => {
+      const result = await checkAndLoginWithToken();
+      if (result && result.redirect === "/profile") {
+        navigate("/profile");
+      }
+    };
+
+    autoLogin();
+  }, []);
 
   const [signupCred, setSignupCred] = useState({
     username: "",
@@ -50,7 +54,7 @@ export default function LoginPage({ onLogin }) {
       onLogin();
       navigate("/profile");
     } catch (error) {
-      alert("Invalid Credentials");
+      alert("Invalid Credentials, Please try again");
       console.error("Login failed:", error);
     }
   };

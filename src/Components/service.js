@@ -6,9 +6,7 @@ const API_URL = "http://localhost:5000";
 export const login = async (credentials) => {
   try {
     const response = await axios.post(`${API_URL}/login`, credentials, {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      withCredentials: true,
     });
     return response.data; // The response from the server is usually in the `data` field
   } catch (error) {
@@ -28,14 +26,17 @@ export const logout = async () => {
   }
 };
 
-// Check login status
-export const checkLogin = async () => {
+export const checkAndLoginWithToken = async () => {
   try {
-    const response = await axios.get(`${API_URL}/`);
-    return response.data;
+    const response = await axios.post(
+      `${API_URL}/login`,
+      {},
+      { withCredentials: true }
+    );
+    return response.data; // Should include token, message, redirect, etc.
   } catch (error) {
-    console.error("Error checking login status:", error);
-    throw error;
+    console.error("Auto-login failed:", error.response?.data || error.message);
+    return null;
   }
 };
 
