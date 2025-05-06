@@ -11,16 +11,16 @@ export default function LoginPage({ onLogin }) {
     password: "",
   });
 
-  useEffect(() => {
-    const autoLogin = async () => {
-      const result = await checkAndLoginWithToken();
-      if (result && result.redirect === "/profile") {
-        navigate("/profile");
-      }
-    };
-
-    autoLogin();
-  }, []);
+  // useEffect(() => {
+  //   const autoLogin = async () => {
+  //     const result = await checkAndLoginWithToken();
+  //     if (result && result.redirect === "/profile") {
+  //       navigate("/profile");
+  //     }
+  //   };
+  //
+  //   autoLogin();
+  // }, []);
 
   const [signupCred, setSignupCred] = useState({
     username: "",

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./Components/LoginPage";
 import ProfielPage from "./Components/ProfilePage";
 import { useState } from "react";
+import ErrorPage from "./Components/ErrorPage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,7 +23,7 @@ function App() {
               isLoggedIn ? <ProfielPage /> : <LoginPage onLogin={handleLogin} />
             }
           />
-          <Route path="*" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
     </Router>
