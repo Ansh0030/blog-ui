@@ -18,7 +18,8 @@ export default function ErrorPage() {
                     the page you’re looking for.</p>
                 <div className="mt-10 flex items-center justify-center gap-x-6">
                     <a href="#" onClick={handleNav}
-                       className="rounded-md bg-amber-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-amber-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Go
+                       className="rounded-md bg-amber-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs
+                       hover:bg-amber-900">Go
                         back home</a>
                     <a href="#" className="border-4 border-amber-500 rounded px-2 py-1 font-semibold text-gray-900">Contact support <span
                         aria-hidden="true">&rarr;</span></a>
