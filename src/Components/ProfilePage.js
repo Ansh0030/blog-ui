@@ -1,41 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// ProfielPage.js
+import React from "react";
+import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
 import "./comp.css";
-
+import HomeComp from "./ProfileComponents/HomeComp";
+import OwnBlogs from "./ProfileComponents/OwnBlogs";
+import Profile from "./ProfileComponents/Profile";
+import { FiAlignJustify } from "react-icons/fi";
 export default function ProfielPage() {
     const navigate = useNavigate();
-    const [page, setPage] = useState({
-        home: true,
-        ownBlog: false,
-        profile: false,
-    });
+    const location = useLocation();
 
-    useEffect(() => {
-        console.log("Updated page state:", page);
-    }, [page]);
+    const isActive = (path) => location.pathname === path;
 
-    const handleHome = () => {
-        setPage({
-            home: true,
-            ownBlog: false,
-            profile: false,
-        });
-    };
-
-    const handleOBlog = () => {
-        setPage({
-            home: false,
-            ownBlog: true,
-            profile: false,
-        });
-    };
-
-    const handleProfile = () => {
-        setPage({
-            home: false,
-            ownBlog: false,
-            profile: true,
-        });
+    const handleNavigate = (path) => {
+        navigate(path);
     };
 
     const handleLogout = () => {
@@ -45,24 +23,30 @@ export default function ProfielPage() {
     return (
         <div className="flex flex-col items-center min-h-screen">
             {/* Navbar */}
-            <div className="h-12 w-3/4 font-sans text-xl mt-2 flex items-center justify-between">
-                <div className="pl-2 text-amber-500 font-bold">BLOGGERhub</div>
-                <div className="flex">
+            <div className="h-12 w-full md:w-3/4 font-sans text-xl mt-2 flex items-center justify-between">
+                <div className="pl-2 text-amber-500 font-bold">bloGGGhub</div>
+                <div className="md:flex hidden">
                     <div
-                        className="pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl"
-                        onClick={handleHome}
+                        className={`pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl ${
+                            isActive("/home") ? "bg-amber-200 rounded-2xl" : ""
+                        }`}
+                        onClick={() => handleNavigate("/home")}
                     >
                         Home
                     </div>
                     <div
-                        className="pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl"
-                        onClick={handleOBlog}
+                        className={`pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl ${
+                            isActive("/own-blogs") ? "bg-amber-200 rounded-2xl" : ""
+                        }`}
+                        onClick={() => handleNavigate("/own-blogs")}
                     >
                         Own Blogs
                     </div>
                     <div
-                        className="pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl"
-                        onClick={handleProfile}
+                        className={`pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl ${
+                            isActive("/profile") ? "bg-amber-200 rounded-2xl" : ""
+                        }`}
+                        onClick={() => handleNavigate("/profile")}
                     >
                         Profile
                     </div>
@@ -73,19 +57,20 @@ export default function ProfielPage() {
                         Logout
                     </div>
                 </div>
+                <div className="md:hidden">
+                    <FiAlignJustify />
+                </div>
             </div>
 
             {/* Page Content */}
-            <div className="w-3/4 mt-6">
-                {page.home && (
-                    <div className="text-lg font-medium text-blue-700">🏠 Welcome to the Home Page!</div>
-                )}
-                {page.ownBlog && (
-                    <div className="text-lg font-medium text-green-700">📝 These are your blogs.</div>
-                )}
-                {page.profile && (
-                    <div className="text-lg font-medium text-purple-700">👤 This is your profile.</div>
-                )}
+            <div className="w-full h-auto md:w-3/4 mt-6 ml-3 border-2 border-dashed border-black">
+                <Routes>
+                    <Route path="/home" element={<HomeComp />} />
+                    <Route path="/own-blogs" element={<OwnBlogs />} />
+                    <Route path="/profile" element={<Profile />} />
+                    {/* Default route */}
+                    <Route path="*" element={<HomeComp />} />
+                </Routes>
             </div>
         </div>
     );

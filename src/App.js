@@ -2,8 +2,11 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./Components/LoginPage";
 import ProfielPage from "./Components/ProfilePage";
-import { useState } from "react";
+import React, { useState } from "react";
 import ErrorPage from "./Components/ErrorPage";
+import HomeComp from "./Components/ProfileComponents/HomeComp";
+import OwnBlogs from "./Components/ProfileComponents/OwnBlogs";
+import Profile from "./Components/ProfileComponents/Profile";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,12 +21,12 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage onLogin={handleLogin} />} />
           <Route
-            path="/profile"
+            path="/*"
             element={
               isLoggedIn ? <ProfielPage /> : <LoginPage onLogin={handleLogin} />
             }
           />
-          <Route path="*" element={<ErrorPage />} />
+          <Route path="*" element={<ErrorPage /> } />
         </Routes>
       </div>
     </Router>

@@ -1,11 +1,10 @@
 import React from 'react'
 
-export default function HomeComp() {
+export default function OwnBlogs() {
     return(
         <div className="w-full">
-            Ram Ram Lagderrr!!
+            Ram Ram Mittar!!
 
         </div>
     )
 }
-

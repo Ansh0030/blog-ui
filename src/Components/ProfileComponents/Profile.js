@@ -1,11 +1,10 @@
 import React from 'react'
 
-export default function HomeComp() {
+export default function Profile() {
     return(
         <div className="w-full">
-            Ram Ram Lagderrr!!
+            Ram Ram Chore!!
 
         </div>
     )
 }
-
