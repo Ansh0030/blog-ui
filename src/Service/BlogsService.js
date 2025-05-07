@@ -15,3 +15,12 @@ export const getAllBlogs = async () => {
 export const createBlog = async (data) => {
     await axios.post(URL, data);
 }
+
+export const deleteBlog = async (id) => {
+    await axios.delete(URL);
+}
+
+export const getBlogById = async (id) => {
+    const response = await axios.get(URL);
+    return response.data;
+}
