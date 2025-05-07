@@ -17,10 +17,16 @@ export const createBlog = async (data) => {
 }
 
 export const deleteBlog = async (id) => {
-    await axios.delete(URL);
-}
+    await axios.delete(`${URL}/${id}`);
+};
 
-export const getBlogById = async (id) => {
-    const response = await axios.get(URL);
-    return response.data;
-}
+
+export const getBlogById = async (username) => {
+    try {
+        const response = await axios.post(`${URL}/author`, { username });
+        return response.data;
+    } catch (error) {
+        console.error("Error in getBlogById:", error);
+        throw error;
+    }
+};

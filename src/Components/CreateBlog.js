@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { useAuth } from "../AuthAPI";
 import { createBlog } from "../Service/BlogsService";
 import {useNavigate} from "react-router-dom";
+import { FiRotateCw } from "react-icons/fi";
 
 export default function CreateBlog() {
-    const { register, handleSubmit, formState: { isDirty } } = useForm();
+    const { register, handleSubmit, formState: { isDirty }, reset } = useForm();
     const [data, setData] = useState(null);
     const { username } = useAuth();
     const navigate = useNavigate();
@@ -31,7 +32,16 @@ export default function CreateBlog() {
                 <h1 className="text-amber-500 font-extrabold text-3xl mb-2">Share Your Thoughts</h1>
 
                 <div className="w-full">
-                    <label className="block font-semibold mb-1 text-gray-700">Blog Title</label>
+                    <div className="flex justify-between items-center mb-1">
+                        <label className="font-semibold text-gray-700">Blog Title</label>
+                        <div
+                            className="flex items-center gap-1 text-amber-400 cursor-pointer hover:text-amber-500 hover:underline"
+                            onClick={() => {reset()}}
+                        >
+                            <FiRotateCw/>
+                            <span>Reset</span>
+                        </div>
+                    </div>
                     <input
                         className="w-full p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400"
                         type="text"
