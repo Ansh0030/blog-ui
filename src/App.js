@@ -26,7 +26,6 @@ function App() {
               isLoggedIn ? <ProfielPage /> : <LoginPage onLogin={handleLogin} />
             }
           />
-          <Route path="*" element={<ErrorPage /> } />
         </Routes>
       </div>
     </Router>

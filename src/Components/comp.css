@@ -84,17 +84,16 @@
 }
 .header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px; /* Adjust space between icon and text as needed */
+  /*align-items: center;*/
+  /*justify-content: center;*/
+
 }
 
 .backIcon {
   cursor: pointer;
   padding-top: 1rem;
-  height: 30px;
-  width: 30px;
-  font-size: 20px; /* Adjust icon size */
+  padding-bottom: 6px;
+  font-size: 40px;
 }
 
 /* Title styling */
@@ -102,7 +101,7 @@
   font-size: 1.8rem;
   font-weight: 500;
   color: #2b363c; /* Deep, rich color for text */
-  margin-bottom: 1rem;
+  /*margin-bottom: 1rem;*/
 }
 
 /* Input fields */
