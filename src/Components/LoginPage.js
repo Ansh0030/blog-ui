@@ -47,15 +47,17 @@ export default function LoginPage({ onLogin }) {
     }
   };
 
-  const { loginUser } = useAuth(); // use context
+  const { loginUser } = useAuth(); // from context
 
   const handleLogin = async () => {
     try {
       const result = await login(credentials);
       console.log("Login successful:", result);
 
-      loginUser(credentials.username); // store username in context
-      onLogin();
+      // store userId and username in context
+      loginUser(result.user._id, result.user.username);
+
+      onLogin(); // optional callback
       navigate("/profile");
     } catch (error) {
       alert("Invalid Credentials, Please try again");
