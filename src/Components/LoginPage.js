@@ -3,6 +3,7 @@ import "./comp.css";
 import { checkAndLoginWithToken, checkLogin, login, register } from "./service";
 import { useNavigate } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi2";
+import {useAuth} from "../AuthAPI";
 
 export default function LoginPage({ onLogin }) {
   const navigate = useNavigate();
@@ -46,11 +47,14 @@ export default function LoginPage({ onLogin }) {
     }
   };
 
+  const { loginUser } = useAuth(); // use context
+
   const handleLogin = async () => {
     try {
       const result = await login(credentials);
       console.log("Login successful:", result);
-      // Perform any post-login logic, like navigating to a profile page
+
+      loginUser(credentials.username); // store username in context
       onLogin();
       navigate("/profile");
     } catch (error) {

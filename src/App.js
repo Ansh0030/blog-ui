@@ -7,6 +7,7 @@ import ErrorPage from "./Components/ErrorPage";
 import HomeComp from "./Components/ProfileComponents/HomeComp";
 import OwnBlogs from "./Components/ProfileComponents/OwnBlogs";
 import Profile from "./Components/ProfileComponents/Profile";
+import CreateBlog from "./Components/CreateBlog";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,6 +30,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+
   );
 }
 

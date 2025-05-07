@@ -1,20 +1,24 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
 import "./comp.css";
 import HomeComp from "./ProfileComponents/HomeComp";
 import OwnBlogs from "./ProfileComponents/OwnBlogs";
 import Profile from "./ProfileComponents/Profile";
 import { FiAlignJustify } from "react-icons/fi";
+import { CiEdit } from "react-icons/ci";
 import ErrorPage from "./ErrorPage";
-export default function ProfielPage() {
+import CreateBlog from "./CreateBlog";
+
+export default function ProfilePage() {
     const navigate = useNavigate();
     const location = useLocation();
 
     const isActive = (path) => location.pathname === path;
 
+
     useEffect(() => {
-        navigate("/home");
-    },[])
+            navigate("/home");
+    }, []);
 
     const handleNavigate = (path) => {
         navigate(path);
@@ -24,8 +28,10 @@ export default function ProfielPage() {
         navigate("/");
     };
 
+    const isCreateBlogPage = location.pathname === "/createBlog";
+
     return (
-        <div className="flex flex-col items-center min-h-screen">
+        <div className="flex flex-col items-center min-h-screen relative">
             {/* Navbar */}
             <div className="h-12 w-full md:w-3/4 font-sans text-xl mt-2 flex items-center justify-between">
                 <div className="pl-2 text-amber-500 text-4xl font-bold">bloGGGhub</div>
@@ -67,15 +73,25 @@ export default function ProfielPage() {
             </div>
 
             {/* Page Content */}
-            <div className="w-full h-auto md:w-3/4 mt-6 ml-3 border-2 border-dashed border-black">
+            <div className="w-full h-auto md:w-3/4 mt-6 ml-3">
                 <Routes>
                     <Route path="/home" element={<HomeComp />} />
                     <Route path="/own-blogs" element={<OwnBlogs />} />
                     <Route path="/profile" element={<Profile />} />
-                    {/* Default route */}
+                    <Route path="/createBlog" element={<CreateBlog />} />
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </div>
+
+            {!isCreateBlogPage && (
+                <div
+                    className="fixed bottom-6 right-10 flex items-center space-x-2 bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-full shadow-lg cursor-pointer z-50"
+                    onClick={() => navigate("/createBlog")}
+                >
+                    <CiEdit className="text-3xl" />
+                    <span className="font-semibold text-xl font-light">Create Blog</span>
+                </div>
+            )}
         </div>
     );
 }
