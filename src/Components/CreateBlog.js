@@ -35,7 +35,7 @@ export default function CreateBlog() {
                     <div className="flex justify-between items-center mb-1">
                         <label className="font-semibold text-gray-700">Blog Title</label>
                         <div
-                            className="flex items-center gap-1 text-amber-400 cursor-pointer hover:text-amber-500 hover:underline"
+                            className="flex items-center gap-1 text-amber-500 cursor-pointer hover:text-amber-400 hover:underline"
                             onClick={() => {reset()}}
                         >
                             <FiRotateCw/>

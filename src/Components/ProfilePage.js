@@ -41,7 +41,7 @@ export default function ProfilePage() {
         <div className="flex flex-col items-center min-h-screen relative">
             {/* Navbar */}
             <div className="h-12 w-full md:w-3/4 font-sans text-xl mt-2 flex items-center justify-between">
-                <div className="pl-2 text-amber-500 text-4xl font-bold">bloGGGhub</div>
+                <div className="pl-2 text-amber-500 text-4xl font-bold hover:cursor-pointer" onClick={() => navigate("/home")}>bloGGGhub</div>
 
                 {/* Desktop Menu */}
                 <div className="md:flex hidden">
