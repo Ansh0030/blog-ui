@@ -3,33 +3,56 @@ import { getAllBlogs } from '../../Service/BlogsService';
 
 export default function HomeComp() {
     const [blogs, setBlogs] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getAllBlogs();
-                setBlogs(data.blogs);
+
+                // Simulate delay (2 seconds)
+                setTimeout(() => {
+                    setBlogs(data.blogs);
+                    setLoading(false);
+                }, 200000);
             } catch (error) {
-                console.error("Error fetching blogs:", error);
+                console.error('Error fetching blogs:', error);
+                setLoading(false);
             }
         };
+
         fetchData();
     }, []);
 
     return (
-        <div className="w-full font-sans space-y-6 p-4">
-            {blogs.map((blog) => (
-                <div
-                    key={blog._id}
-                    className="border-2 border-dashed border-gray-400 rounded-lg p-4 shadow-sm"
-                >
-                    <h2 className="text-black text-xl font-semibold">{blog.title}</h2>
-                    <p className="text-gray-800 pt-2 leading-relaxed whitespace-pre-line">{blog.blogText}</p>
-                    <h2 className="text-xl text-gray-800 flex justify-end mt-4">
-                        ~~ {blog.author.name} {blog.author.surname}
-                    </h2>
-                </div>
-            ))}
+        <div className="w-full min-h-screen flex flex-col items-center justify-center p-6 bg-gray-50">
+            <div className="w-full max-w-4xl space-y-6">
+                {loading
+                    ? Array.from({ length: 3 }).map((_, idx) => (
+                        <div
+                            key={idx}
+                            className="border-2 border-dashed border-gray-300 rounded-lg p-6 space-y-4 animate-pulse bg-white"
+                        >
+                            <div className="h-6 bg-gray-300 rounded w-2/3"></div>
+                            <div className="h-4 bg-gray-200 rounded w-full"></div>
+                            <div className="h-4 bg-gray-200 rounded w-11/12"></div>
+                            <div className="h-4 bg-gray-200 rounded w-10/12"></div>
+                            <div className="h-4 bg-gray-200 rounded w-9/12 ml-auto"></div>
+                        </div>
+                    ))
+                    : blogs.map((blog) => (
+                        <div
+                            key={blog._id}
+                            className="border-2 border-dashed border-gray-400 rounded-lg p-6 bg-white shadow-md"
+                        >
+                            <h2 className="text-black text-2xl font-semibold">{blog.title}</h2>
+                            <p className="text-gray-800 pt-4 leading-relaxed whitespace-pre-line">{blog.blogText}</p>
+                            <h2 className="text-xl text-gray-600 flex justify-end mt-6">
+                                ~{blog.author.name} {blog.author.surname}
+                            </h2>
+                        </div>
+                    ))}
+            </div>
         </div>
     );
 }
