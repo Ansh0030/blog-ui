@@ -135,7 +135,7 @@ export default function ProfilePage() {
             {/* Create Blog Button */}
             {!isCreateBlogPage && (
                 <div
-                    className="fixed bottom-6 right-10 flex items-center space-x-2 bg-amber-500 hover:bg-amber-600 text-black px-4 py-2 rounded-full shadow-lg cursor-pointer z-50"
+                    className="fixed bottom-6 right-10 flex items-center space-x-2 bg-amber-400 hover:bg-amber-600 text-black px-4 py-2 rounded-full shadow-lg cursor-pointer z-50"
                     onClick={() => navigate("/createBlog")}
                 >
                     <CiEdit className="text-3xl" />

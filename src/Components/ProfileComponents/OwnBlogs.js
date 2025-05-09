@@ -53,7 +53,7 @@ export default function OwnBlogs() {
                         </div>
                         <p className="text-gray-800 pt-2 leading-relaxed whitespace-pre-line">{blog.blogText}</p>
                         <h2 className="text-xl text-gray-800 flex justify-end mt-4">
-                            ~~ {blog.author.name} {blog.author.surname}
+                            ~{blog.author.name} {blog.author.surname}
                         </h2>
                     </div>
                 ))

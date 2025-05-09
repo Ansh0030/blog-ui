@@ -1,7 +1,8 @@
 import React from 'react';
 
 const Profile = () => {
-    const profileImage = 'https://via.placeholder.com/200'; // Replace with actual image URL
+    const profileImage = 'https://via';
+    const profileImageAlt = '../assets/profilePhoto.jpg';
     const fullName = 'John Doe';
     const aboutUs = 'We are a team of passionate developers building scalable and user-friendly apps.';
 
@@ -14,8 +15,7 @@ const Profile = () => {
         <div className="flex items-center justify-center">
             <div className="bg-white w-full max-w-5xl h-[90vh] rounded-2xl shadow-lg p-8 flex flex-col items-center justify-center">
                 <img
-                    src={profileImage}
-                    alt="Profile"
+                    src={profileImage || profileImageAlt}
                     className="w-40 h-40 rounded-full object-cover mb-6"
                 />
                 <h1 className="text-4xl font-bold mb-2">{fullName}</h1>

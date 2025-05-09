@@ -14,7 +14,7 @@ export default function HomeComp() {
                 setTimeout(() => {
                     setBlogs(data.blogs);
                     setLoading(false);
-                }, 200000);
+                }, 100);
             } catch (error) {
                 console.error('Error fetching blogs:', error);
                 setLoading(false);
@@ -25,13 +25,13 @@ export default function HomeComp() {
     }, []);
 
     return (
-        <div className="w-full min-h-screen flex flex-col items-center justify-center p-6 bg-gray-50">
-            <div className="w-full max-w-4xl space-y-6">
+        <div className="w-full min-h-screen flex flex-col items-center justify-center p-6 ">
+            <div className="w-full space-y-2">
                 {loading
                     ? Array.from({ length: 3 }).map((_, idx) => (
                         <div
                             key={idx}
-                            className="border-2 border-dashed border-gray-300 rounded-lg p-6 space-y-4 animate-pulse bg-white"
+                            className="border-2 border-dashed rounded-lg p-6 space-y-10 animate-pulse bg-white"
                         >
                             <div className="h-6 bg-gray-300 rounded w-2/3"></div>
                             <div className="h-4 bg-gray-200 rounded w-full"></div>
