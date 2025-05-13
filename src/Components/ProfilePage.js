@@ -73,7 +73,7 @@ export default function ProfilePage() {
                         className="pr-2 text-black font-bold hover:cursor-pointer hover:underline hover:bg-red-300 hover:rounded-2xl"
                         onClick={handleLogout}
                     >
-                        Logout <CiLogout className="inline ml-2 text-xl" />
+                        Logout <CiLogout className="inline ml-2 text-2xl" />
                     </div>
                 </div>
 
