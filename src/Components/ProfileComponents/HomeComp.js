@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllBlogs } from '../../Service/BlogsService';
+import CommentSection from "./CommentSection";
 
 export default function HomeComp() {
     const [blogs, setBlogs] = useState([]);
@@ -50,6 +51,7 @@ export default function HomeComp() {
                             <h2 className="text-xl text-gray-600 flex justify-end mt-6">
                                 ~{blog.author.name} {blog.author.surname}
                             </h2>
+                            <CommentSection blogId={blog._id}></CommentSection>
                         </div>
                     ))}
             </div>
