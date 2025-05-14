@@ -8,6 +8,7 @@ import { FiAlignJustify } from "react-icons/fi";
 import { CiEdit, CiLogout } from "react-icons/ci";
 import ErrorPage from "./ErrorPage";
 import CreateBlog from "./CreateBlog";
+import {logout} from "./service";
 
 export default function ProfilePage() {
     const navigate = useNavigate();
@@ -30,8 +31,9 @@ export default function ProfilePage() {
         setIsMenuOpen(false); // close menu after click
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         navigate("/");
+        // await logout();
         setIsMenuOpen(false); // close menu after logout
     };
 
@@ -41,7 +43,7 @@ export default function ProfilePage() {
         <div className="flex flex-col items-center min-h-screen relative">
             {/* Navbar */}
             <div className="h-12 w-full md:w-3/4 font-sans text-xl mt-2 flex items-center justify-between">
-                <div className="pl-2 text-amber-500 text-4xl font-bold hover:cursor-pointer" onClick={() => navigate("/home")}>bloGGGhub</div>
+                <div className="pl-2 text-gray-600 text-4xl font-bold hover:cursor-pointer border-b-4 border-b-gray-600" onClick={() => navigate("/home")}>BLO<span className="text-amber-400">GG</span>HUB</div>
 
                 {/* Desktop Menu */}
                 <div className="md:flex hidden">

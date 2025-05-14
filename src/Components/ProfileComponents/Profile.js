@@ -4,6 +4,7 @@ import { getImage } from "../../Service/imageService";
 import { uploadImage } from "../../Service/imageService"; // <-- Import your upload function
 import { useNavigate } from "react-router-dom";
 import {CiLogout} from "react-icons/ci";
+import {logout} from "../service";
 
 const Profile = () => {
     const [profile, setProfile] = useState({
@@ -33,7 +34,8 @@ const Profile = () => {
         fetchProfile();
     }, [username]);
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        // await logout();
         navigate("/");
     };
 
