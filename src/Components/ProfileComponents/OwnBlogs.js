@@ -56,7 +56,7 @@ export default function OwnBlogs() {
                         <h2 className="text-xl text-gray-800 flex justify-end mt-4">
                             ~{blog.author.name} {blog.author.surname}
                         </h2>
-                        <CommentSection blogId={blog._id} toDelete={true}></CommentSection>
+                        <CommentSection blogId={blog._id}></CommentSection>
                     </div>
                 ))
             )}
