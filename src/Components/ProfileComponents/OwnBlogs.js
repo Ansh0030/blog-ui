@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getBlogById, deleteBlog } from "../../Service/BlogsService";
 import { useAuth } from "../../AuthAPI";
 import { SlTrash } from "react-icons/sl";
+import CommentSection from "./CommentSection";
 
 export default function OwnBlogs() {
     const [blogs, setBlogs] = useState([]);
@@ -55,6 +56,7 @@ export default function OwnBlogs() {
                         <h2 className="text-xl text-gray-800 flex justify-end mt-4">
                             ~{blog.author.name} {blog.author.surname}
                         </h2>
+                        <CommentSection blogId={blog._id} toDelete={true}></CommentSection>
                     </div>
                 ))
             )}

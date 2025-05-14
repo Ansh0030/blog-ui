@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../AuthAPI';
+import {SlTrash} from "react-icons/sl";
 
-export default function CommentSection({ blogId }) {
+export default function CommentSection({ blogId , toDelete = false }) {
     const { register, handleSubmit, reset, formState:{isDirty} } = useForm();
     const [comments, setComments] = useState([]);
     const { userId } = useAuth(); // username == userId
@@ -25,6 +26,24 @@ export default function CommentSection({ blogId }) {
         fetchComments();
     }, [blogId]);
 
+    const handleDelete = async (commentId) => {
+        try {
+            const response = await fetch(`http://localhost:5000/comment/${commentId}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                // Remove the deleted comment from the UI
+                setComments((prev) => prev.filter(comment => comment._id !== commentId));
+            } else {
+                console.error('Failed to delete comment');
+            }
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+        }
+    };
+
+
     // Handle form submission
     const onSubmit = async (data) => {
         try {
@@ -45,7 +64,7 @@ export default function CommentSection({ blogId }) {
                 const newComment = result?.comment;
                 if (newComment) {
                     setComments((prev) => [...(Array.isArray(prev) ? prev : []), newComment]);
-                    reset(); // clear form
+                    reset();
                 }
             } else {
                 console.error('Failed to post comment');
@@ -59,16 +78,19 @@ export default function CommentSection({ blogId }) {
         <div className="p-4 border rounded bg-white shadow mt-4">
             <h2 className="text-lg font-semibold mb-2">Comment Section</h2>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2 mb-4 h-10">
-                <input
-                    {...register('text', {required: true})}
-                    placeholder="Write your comment..."
-                    className="flex-1 border-b-gray-500 rounded"
-                />
-                <button type="submit" className=" text-white -mt-0.5 py-5 w-1/5 h-10 rounded">
-                    Post
-                </button>
-            </form>
+            {!toDelete && (
+                <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2 mb-4 h-10">
+                    <input
+                        {...register('text', {required: true})}
+                        placeholder="Write your comment..."
+                        className="flex-1 border-b-gray-500 rounded"
+                    />
+                    <button type="submit" disabled={!isDirty} className=" text-white -mt-0.5 py-5 w-1/5 h-10 rounded">
+                        Post
+                    </button>
+                </form>
+            )}
+
 
             <div className="space-y-4">
                 {Array.isArray(comments) && comments.length > 0 ? (
@@ -84,10 +106,15 @@ export default function CommentSection({ blogId }) {
                             {/* Comment content */}
                             <div className="flex flex-col">
                                 {/* Author Name */}
-                                <span className="text-base font-semibold text-gray-900">
+
+                                <div className="flex items-center justify-between">
+                                    <span className="text-base font-semibold text-gray-900">
                                     {comment.author?.name} {comment.author?.surname}
                                 </span>
-
+                                    {!!toDelete && (
+                                        <SlTrash onClick={() => handleDelete(comment._id)} className="w-8 cursor-pointer text-red-600 hover:text-red-800" />
+                                    )}
+                                </div>
                                 {/* Comment Text */}
                                 <p className="text-sm text-gray-700 mt-1">{comment.text}</p>
                             </div>
