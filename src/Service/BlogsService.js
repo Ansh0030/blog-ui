@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:5000/blogs";
+const URL = "http://192.168.14.129:5000/blogs";
 
 export const getAllBlogs = async () => {
     try {

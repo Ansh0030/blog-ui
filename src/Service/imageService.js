@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:5000";
+const URL = "http://192.168.14.129:5000";
 
 export const uploadImage = async (file, username) => {
     const formData = new FormData();

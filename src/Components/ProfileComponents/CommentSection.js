@@ -12,7 +12,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/comment/${blogId}`);
+                const response = await fetch(`http://192.168.14.129:5000/comment/${blogId}`);
                 const data = await response.json();
                 if (Array.isArray(data.comments)) {
                     setComments(data.comments);
@@ -29,7 +29,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     // Delete handler
     const handleDelete = async (commentId) => {
         try {
-            const response = await fetch(`http://localhost:5000/comment/${commentId}`, {
+            const response = await fetch(`http://192.168.14.129:5000/comment/${commentId}`, {
                 method: 'DELETE',
             });
 
@@ -46,7 +46,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     // Submit handler
     const onSubmit = async (data) => {
         try {
-            const response = await fetch('http://localhost:5000/comment', {
+            const response = await fetch('http://192.168.14.129:5000/comment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
                     <input
                         {...register('text', {required: true})}
                         placeholder="Write your comment..."
-                        className="flex-1 border-b-gray-500 rounded"
+                        className="flex-1 border-b-gray-500 rounded focus-visible:border-b-gray-500"
                     />
                     <button
                         type="submit"

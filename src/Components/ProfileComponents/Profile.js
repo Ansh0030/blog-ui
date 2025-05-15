@@ -24,7 +24,7 @@ const Profile = () => {
                 setProfile({
                     imagePath: data.getImage?.path || "",
                     fullName: `${data.user?.name || ""} ${data.user?.surname || ""}`,
-                    aboutUs: "This is a web based application made with MERN Stack and Tailwind CSS.",
+                    aboutUs: "This is a web based application made with MERN Stack, Tailwind CSS, Cloudinary Cloud Serivce.",
                 });
             } catch (error) {
                 console.error("Error fetching profile data:", error);

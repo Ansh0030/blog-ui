@@ -13,7 +13,7 @@ export default function HomeComp() {
 
                 // Simulate delay (2 seconds)
                 setTimeout(() => {
-                    setBlogs(data.blogs);
+                    setBlogs(data.blogs.reverse());
                     setLoading(false);
                 }, 100);
             } catch (error) {

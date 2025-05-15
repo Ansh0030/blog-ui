@@ -48,34 +48,31 @@ export default function ProfilePage() {
                 {/* Desktop Menu */}
                 <div className="md:flex hidden">
                     <div
-                        className={`pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl ${
-                            isActive("/home") ? "bg-amber-200 rounded-2xl" : ""
-                        }`}
-                        onClick={() => handleNavigate("/home")}
-                    >
+                        className={`pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl px-2 ${
+                            isActive("/home") ? "bg-amber-200 rounded-2xl px-2" : "" }`} onClick={() => handleNavigate("/home")}>
                         Home
                     </div>
                     <div
-                        className={`pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl ${
-                            isActive("/own-blogs") ? "bg-amber-200 rounded-2xl" : ""
+                        className={`pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl px-2 ${
+                            isActive("/own-blogs") ? "bg-amber-200 rounded-2xl px-2" : ""
                         }`}
                         onClick={() => handleNavigate("/own-blogs")}
                     >
                         Own Blogs
                     </div>
                     <div
-                        className={`pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl ${
-                            isActive("/profile") ? "bg-amber-200 rounded-2xl" : ""
+                        className={`pr-4 text-black font-bold hover:cursor-pointer hover:bg-amber-200 hover:rounded-2xl px-2 ${
+                            isActive("/profile") ? "bg-amber-200 rounded-2xl px-2" : ""
                         }`}
                         onClick={() => handleNavigate("/profile")}
                     >
                         Profile
                     </div>
                     <div
-                        className="pr-2 text-black font-bold hover:cursor-pointer hover:underline hover:bg-red-300 hover:rounded-2xl"
+                        className="pr-2 text-black font-bold hover:cursor-pointer hover:underline hover:bg-red-300 hover:rounded-2xl px-2"
                         onClick={handleLogout}
                     >
-                        Logout <CiLogout className="inline ml-2 text-2xl" />
+                        Logout <CiLogout className="inline ml-2 text-2xl " />
                     </div>
                 </div>
 
@@ -88,7 +85,7 @@ export default function ProfilePage() {
             {/* Mobile Menu Dropdown */}
             {isMenuOpen && (
                 <div className="absolute top-16 left-0 w-full bg-white border-t shadow-md p-4 md:hidden z-50">
-                    <ul className="space-y-4">
+                    <ul className="space-y-2 ">
                         <li
                             className={`py-2 font-bold hover:bg-amber-200 rounded-xl ${
                                 isActive("/home") ? "bg-amber-200" : ""
