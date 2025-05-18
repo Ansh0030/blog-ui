@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://blogghub.local:5000/blogs";
+const URL = "https://blog-backend-45sp.onrender.com/blogs";
 
 export const getAllBlogs = async () => {
     try {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://blogghub.local:5000";
+const URL = "https://blog-backend-45sp.onrender.com";
 
 export const uploadImage = async (file, username) => {
     const formData = new FormData();

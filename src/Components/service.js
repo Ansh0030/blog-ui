@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://blogghub.local:5000";
+const API_URL = "https://blog-backend-45sp.onrender.com";
 
 // Login function
 export const login = async (credentials) => {

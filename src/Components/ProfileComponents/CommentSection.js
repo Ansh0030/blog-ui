@@ -12,7 +12,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await fetch(`http://blogghub.local:5000/comment/${blogId}`);
+                const response = await fetch(`https://blog-backend-45sp.onrender.com/comment/${blogId}`);
                 const data = await response.json();
                 if (Array.isArray(data.comments)) {
                     setComments(data.comments);
@@ -29,7 +29,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     // Delete handler
     const handleDelete = async (commentId) => {
         try {
-            const response = await fetch(`http://blogghub.local:5000/comment/${commentId}`, {
+            const response = await fetch(`https://blog-backend-45sp.onrender.com/comment/${commentId}`, {
                 method: 'DELETE',
             });
 
@@ -46,7 +46,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     // Submit handler
     const onSubmit = async (data) => {
         try {
-            const response = await fetch('http://blogghub.local:5000/comment', {
+            const response = await fetch('https://blog-backend-45sp.onrender.com/comment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
