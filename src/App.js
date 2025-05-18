@@ -4,7 +4,7 @@ import LoginPage from "./Components/LoginPage";
 import ProfielPage from "./Components/ProfilePage";
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,19 +34,19 @@ function App() {
   };
 
   return (
-      <Router>
-        <div>
-          <Routes>
-            <Route path="/" element={<LoginPage onLogin={handleLogin} />} />
-            <Route
-                path="/*"
-                element={
-                  isLoggedIn ? <ProfielPage /> : <LoginPage onLogin={handleLogin} />
-                }
-            />
-          </Routes>
-        </div>
-      </Router>
+    <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<LoginPage onLogin={handleLogin} />} />
+          <Route
+            path="/*"
+            element={
+              isLoggedIn ? <ProfielPage /> : <LoginPage onLogin={handleLogin} />
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
