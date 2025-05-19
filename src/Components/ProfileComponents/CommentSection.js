@@ -76,7 +76,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     };
 
     return (
-        <div className="p-4 border rounded bg-white shadow mt-4">
+        <div className="p-4 border rounded bg-white shadow mt-4 max-w-full`">
             <h2 className="text-lg font-semibold mb-2">Comment Section</h2>
 
             {!!toDelete && (
@@ -89,10 +89,11 @@ export default function CommentSection({ blogId , toDelete = false }) {
                     <button
                         type="submit"
                         disabled={!isDirty}
-                        className="text-white w-1/5 h-10 rounded"
+                        className="text-white w-1/5 h-10 rounded bg-[#d39e00] flex items-center justify-center"
                     >
                         Post
                     </button>
+
                 </form>
             )}
 
