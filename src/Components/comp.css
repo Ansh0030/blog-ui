@@ -1,14 +1,23 @@
-/* Flip card container */
+body, input, button, h1, p {
+  font-family: "Inter", sans-serif;
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f3f0e6;
+}
+
 .flip-card {
   background-color: transparent;
   width: 800px;
   max-width: 95vw;
   height: 520px;
   perspective: 1000px;
-  font-family: "Inter", sans-serif;
 }
 
-/* Inner flip wrapper */
 .flip-card-inner {
   position: relative;
   width: 100%;
@@ -17,12 +26,10 @@
   transform-style: preserve-3d;
 }
 
-/* Flipped state */
 .flip-card-inner.flipped {
   transform: rotateY(180deg);
 }
 
-/* Card sides */
 .flip-card-front,
 .flip-card-back {
   position: absolute;
@@ -38,26 +45,15 @@
   color: #2e2e2e;
 }
 
-/* Front (Login) - Match colors from the image */
 .flip-card-front {
-  background: linear-gradient(
-    135deg,
-    #ffd8d7 0%,
-    #ffffff 100%
-  ); /* Red to light peach */
+  background: linear-gradient(to bottom right, #ffffff, #f5f3f0);
 }
 
-/* Back (Signup) - Match colors from the image */
 .flip-card-back {
-  background: linear-gradient(
-    135deg,
-    #f3a3a0 0%,
-    #ffd8d3 100%
-  ); /* Darker red to soft coral */
+  background: linear-gradient(to bottom right, #f9f7f2, #ffffff);
   transform: rotateY(180deg);
 }
 
-/* Left/right panels */
 .card-content {
   flex: 1;
   padding: 2rem;
@@ -69,24 +65,25 @@
 
 .card-image {
   flex: 1;
-  display: block;
+  display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.3);
+  padding: 0;
+  margin: 0;
+  background: #ffffff;
 }
 
 .card-image img {
   height: 100%;
   width: 100%;
-  border-radius: 0;
   object-fit: contain;
-  background-color: white;
+  border-radius: 0;
 }
+
 .header {
   display: flex;
-  /*align-items: center;*/
-  /*justify-content: center;*/
-
+  align-items: center;
+  width: 100%;
 }
 
 .backIcon {
@@ -96,15 +93,13 @@
   font-size: 40px;
 }
 
-/* Title styling */
 .title {
   font-size: 1.8rem;
   font-weight: 500;
-  color: #2b363c; /* Deep, rich color for text */
-  /*margin-bottom: 1rem;*/
+  color: #2b363c;
+  margin-left: 1rem;
 }
 
-/* Input fields */
 .inputBox {
   width: 80%;
   padding: 12px;
@@ -116,50 +111,27 @@
 }
 
 .inputBox:focus {
-  border-color: #d8534e; /* Match the red tones */
+  border-color: #555;
   outline: none;
 }
 
-/* Buttons */
 button {
-  margin-top: 1rem;
-  padding: 12px 24px;
-  background: linear-gradient(
-    to right,
-    #ff725e,
-    #d8534e
-  ); /* Coral red to dark red gradient */
+  width: 48%;
+  padding: 12px;
+  font-size: 1rem;
+  background: linear-gradient(to right, #444, #222);
   border: none;
   border-radius: 8px;
   color: #fff;
   font-weight: bold;
-  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 button:hover {
-  background: linear-gradient(
-    to right,
-    #e64845,
-    #ff725e
-  ); /* Lighter red on hover */
+  background: linear-gradient(to right, #222, #444);
 }
 
-/* Center the card in viewport */
-.mainContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(
-    to right,
-    #ffffff,
-    #f7f7f7
-  ); /* White to light background */
-}
-
-/* Styling for the buttons container */
 .button-container {
   display: flex;
   justify-content: space-between;
@@ -167,48 +139,32 @@ button:hover {
   margin-top: 1rem;
 }
 
-/* Common button styles for both buttons */
-button {
-  width: 48%; /* Adjust this to fit both buttons side by side with some space */
-  padding: 12px;
-  font-size: 1rem;
-  background: linear-gradient(
-    to right,
-    #fa978a,
-    #ff8480
-  ); /* Coral red to dark red gradient */
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: linear-gradient(
-    to right,
-    #e64845,
-    #ff725e
-  ); /* Lighter red on hover */
-}
-
-/* Ensure the buttons have same height */
-button,
-.button-container button {
-  height: 45px; /* Same height for both buttons */
+.name-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 1rem;
+  width: 80%;
+}
+
+.name-container .inputBox {
+  flex: 1;
+  margin: 0.5rem 0;
 }
 
 h1 {
-  font-family: inter;
-  color: #ff725e;
-  font-size: 300%;
+  font-family: "Inter", sans-serif;
+  color: #222;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .profileImg {
   width: 300px !important;
   height: 300px !important;
+}
+.dual-buttons {
+  display: flex;
+  gap: 1rem;
+  width: 80%;
+  justify-content: space-between;
+  margin-top: 1rem;
 }

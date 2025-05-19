@@ -89,7 +89,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
                     <button
                         type="submit"
                         disabled={!isDirty}
-                        className="text-white -mt-0.5 py-5 w-1/5 h-10 rounded"
+                        className="text-white w-1/5 h-10 rounded"
                     >
                         Post
                     </button>

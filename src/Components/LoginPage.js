@@ -66,107 +66,108 @@ export default function LoginPage({ onLogin }) {
   };
 
   return (
-    <div className="mainContainer">
-      {/* Login Page */}
-      <div className="flip-card">
-        <div className={`flip-card-inner ${isFlipped ? "flipped" : ""}`}>
-          <div className="flip-card-front">
-            <div className="card-content">
-              <h1>bloghub</h1>
+      <div className="mainContainer">
+        <div className="flip-card">
+          <div className={`flip-card-inner ${isFlipped ? "flipped" : ""}`}>
+            {/* FRONT - Login */}
+            <div className="flip-card-front">
+              <div className="card-content">
+                <h1 className="font-bold">Blo<span className="text-amber-400">gg</span>hub</h1>
+                <p className="title">Login</p>
 
-              <p className="title">Login</p>
-
-              <input
-                className="inputBox"
-                placeholder="Username"
-                value={credentials.username}
-                onChange={(e) =>
-                  setCredentials({ ...credentials, username: e.target.value })
-                }
-              />
-              <input
-                className="inputBox"
-                type="password"
-                placeholder="Password"
-                value={credentials.password}
-                onChange={(e) =>
-                  setCredentials({ ...credentials, password: e.target.value })
-                }
-              />
-              <div className="button-container">
-                <button onClick={handleSignUP}>Sign Up</button>
-                <button onClick={handleLogin}>Login</button>
+                <input
+                    className="inputBox"
+                    placeholder="Username"
+                    value={credentials.username}
+                    onChange={(e) =>
+                        setCredentials({...credentials, username: e.target.value})
+                    }
+                />
+                <input
+                    className="inputBox"
+                    type="password"
+                    placeholder="Password"
+                    value={credentials.password}
+                    onChange={(e) =>
+                        setCredentials({...credentials, password: e.target.value})
+                    }
+                />
+                <div className="button-container">
+                  <button onClick={handleSignUP}>Sign Up</button>
+                  <button onClick={handleLogin}>Login</button>
+                </div>
+              </div>
+              <div className="card-image">
+                <img src="/assets/login.jpg" alt="Login Visual"/>
               </div>
             </div>
-            <div className="card-image">
-              <img src="/assets/login.jpg" alt="Login Visual" />
-            </div>
-          </div>
 
-          {/* Sign Up page */}
-          <div className="flip-card-back">
-            <div className="card-image">
-              <img src="/assets/register.jpg" alt="Register Visual" />
-            </div>
-            <div className="card-content">
-              <div className="header">
-                <HiArrowLeft className="backIcon" onClick={handleSignUP} />
+            {/* BACK - Signup */}
+            <div className="flip-card-back">
+              <div className="card-image">
+                <img src="/assets/register.jpg" alt="Register Visual"/>
+              </div>
+              <div className="card-content">
                 <p className="title">Create Account</p>
+
+                <input
+                    className="inputBox"
+                    value={signupCred.username}
+                    onChange={(e) =>
+                        setSignupCred({
+                          ...signupCred,
+                          username: e.target.value,
+                        })
+                    }
+                    placeholder="Username"
+                />
+
+                <div className="name-container">
+                  <input
+                      className="inputBox"
+                      value={signupCred.name}
+                      onChange={(e) =>
+                          setSignupCred({
+                            ...signupCred,
+                            name: e.target.value,
+                          })
+                      }
+                      placeholder="First Name"
+                  />
+                  <input
+                      className="inputBox"
+                      value={signupCred.surname}
+                      onChange={(e) =>
+                          setSignupCred({
+                            ...signupCred,
+                            surname: e.target.value,
+                          })
+                      }
+                      placeholder="Last Name"
+                  />
+                </div>
+
+                <input
+                    className="inputBox"
+                    type="password"
+                    value={signupCred.password}
+                    onChange={(e) =>
+                        setSignupCred({
+                          ...signupCred,
+                          password: e.target.value,
+                        })
+                    }
+                    placeholder="Password"
+                />
+
+                <div className="dual-buttons">
+                  <button onClick={handleFlip}>Submit</button>
+                  <button onClick={handleSignUP}>Back to Login</button>
+                </div>
               </div>
-
-              <input
-                className="inputBox"
-                value={signupCred.username}
-                onChange={(e) =>
-                  setSignupCred({
-                    ...signupCred,
-                    username: e.target.value,
-                  })
-                }
-                placeholder="Username"
-              />
-
-              <input
-                className="inputBox"
-                value={signupCred.name}
-                onChange={(e) =>
-                  setSignupCred({
-                    ...signupCred,
-                    name: e.target.value,
-                  })
-                }
-                placeholder="First Name"
-              />
-
-              <input
-                className="inputBox"
-                value={signupCred.surname}
-                onChange={(e) =>
-                  setSignupCred({
-                    ...signupCred,
-                    surname: e.target.value,
-                  })
-                }
-                placeholder="Last Name"
-              />
-
-              <input
-                className="inputBox"
-                type="password"
-                value={signupCred.password}
-                onChange={(e) =>
-                  setSignupCred({
-                    ...signupCred,
-                    password: e.target.value,
-                  })
-                }
-                placeholder="Password"
-              />
-              <button onClick={handleFlip}>Submit</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
