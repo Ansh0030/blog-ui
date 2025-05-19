@@ -8,11 +8,13 @@ export default function CommentSection({ blogId , toDelete = false }) {
     const [comments, setComments] = useState([]);
     const { userId, username } = useAuth(); // username == userId
 
+    const URL_API = "https://blog-backend-45sp.onrender.com/comment"
+    const URL = "http://localhost:5000/comment"
     // Fetch comments
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await fetch(`https://blog-backend-45sp.onrender.com/comment/${blogId}`);
+                const response = await fetch(`${URL}/${blogId}`);
                 const data = await response.json();
                 if (Array.isArray(data.comments)) {
                     setComments(data.comments);
@@ -29,7 +31,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     // Delete handler
     const handleDelete = async (commentId) => {
         try {
-            const response = await fetch(`https://blog-backend-45sp.onrender.com/comment/${commentId}`, {
+            const response = await fetch(`${URL}/commentId`, {
                 method: 'DELETE',
             });
 
@@ -46,7 +48,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     // Submit handler
     const onSubmit = async (data) => {
         try {
-            const response = await fetch('https://blog-backend-45sp.onrender.com/comment', {
+            const response = await fetch(`${URL}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
