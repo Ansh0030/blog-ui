@@ -31,7 +31,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
     // Delete handler
     const handleDelete = async (commentId) => {
         try {
-            const response = await fetch(`${URL}/commentId`, {
+            const response = await fetch(`${URL}/${commentId}`, {
                 method: 'DELETE',
             });
 
