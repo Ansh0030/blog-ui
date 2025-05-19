@@ -40,7 +40,7 @@ export default function ProfilePage() {
     const isCreateBlogPage = location.pathname === "/createBlog";
 
     return (
-        <div className="flex flex-col items-center min-h-screen relative">
+        <div className="flex flex-col items-center min-h-screen relative bg-[#f5f5f0]">
             {/* Navbar */}
             <div className="h-12 w-full md:w-3/4 font-sans text-xl mt-2 flex items-center justify-between">
                 <div className="pl-2 text-gray-600 text-2xl md:text-4xl font-bold hover:cursor-pointer border-b-4 border-b-gray-600" onClick={() => navigate("/home")}>BLO<span className="text-amber-400">GG</span>HUB</div>
@@ -134,7 +134,7 @@ export default function ProfilePage() {
             {/* Create Blog Button */}
             {!isCreateBlogPage && (
                 <div
-                    className="fixed bottom-6 right-10 flex items-center space-x-2 bg-amber-400 hover:bg-amber-600 text-black px-4 py-2 rounded-full shadow-lg cursor-pointer z-50"
+                    className="fixed bottom-6 right-10 flex items-center space-x-2 bg-[#d39e00] hover:bg-[#b78600] text-black px-4 py-2 rounded-full shadow-lg cursor-pointer z-50"
                     onClick={() => navigate("/createBlog")}
                 >
                     <CiEdit className="text-3xl" />

@@ -24,49 +24,53 @@ export default function CreateBlog() {
     };
 
     return (
-        <div className="flex justify-center  ">
+        <div className="flex justify-center px-4 py-8">
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="flex flex-col items-center gap-8 w-full md:w-full  p-8 rounded-xl shadow-lg bg-white"
+                className="flex flex-col items-center gap-8 w-full max-w-3xl p-8 rounded-xl shadow-md bg-[#fcfcfa] border border-gray-200"
             >
-                <h1 className="text-amber-500 font-extrabold text-3xl mb-2">Share Your Thoughts</h1>
+                <h1 className="text-[#d39e00] font-bold text-3xl mb-2">Share Your Thoughts</h1>
 
+                {/* Blog Title */}
                 <div className="w-full">
                     <div className="flex justify-between items-center mb-1">
-                        <label className="font-semibold text-gray-700">Blog Title</label>
+                        <label className="font-semibold text-gray-800">Blog Title</label>
                         <div
-                            className="flex items-center gap-1 text-amber-500 cursor-pointer hover:text-amber-400 hover:underline"
-                            onClick={() => {reset()}}
+                            className="flex items-center gap-1 text-[#d39e00] cursor-pointer hover:text-[#b78600] hover:underline"
+                            onClick={() => reset()}
                         >
                             <FiRotateCw/>
                             <span>Reset</span>
                         </div>
                     </div>
                     <input
-                        className="w-full p-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#d39e00] bg-white text-gray-800"
                         type="text"
                         {...register("title", {required: true})}
                         placeholder="Enter the title of your blog"
                     />
                 </div>
 
+                {/* Blog Content */}
                 <div className="w-full">
-                    <label className="block font-semibold mb-1 text-gray-700">Content</label>
+                    <label className="block font-semibold mb-1 text-gray-800">Content</label>
                     <textarea
-                        className="w-full h-40 p-3 rounded-xl border border-gray-300 resize-none focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        className="w-full h-40 p-3 rounded-lg border border-gray-300 resize-none focus:outline-none focus:ring-2 focus:ring-[#d39e00] bg-white text-gray-800"
                         {...register("blogText", {required: true})}
                         placeholder="Write your blog content here..."
                     ></textarea>
                 </div>
 
+                {/* Submit Button */}
                 <input
-                    className="bg-amber-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-amber-600 disabled:opacity-50 cursor-pointer transition"
+                    className="bg-[#d39e00] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#b78600] disabled:opacity-50 cursor-pointer transition"
                     type="submit"
                     value="Publish Blog"
                     disabled={!isDirty}
                 />
             </form>
         </div>
+
 
     );
 }

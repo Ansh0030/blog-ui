@@ -61,21 +61,21 @@ const Profile = () => {
     const profileImageAlt = "./assets/profilePhoto.jpg";
 
     return (
-        <div className="flex items-center justify-center">
-            <div className="bg-white w-full max-w-5xl h-[90vh] rounded-2xl shadow-lg p-8 flex flex-col items-center justify-center">
+        <div className="flex items-center justify-center  min-h-screen px-4">
+            <div
+                className="bg-[#fcfcfa] w-full max-w-5xl h-[90vh] rounded-xl shadow-md p-8 flex flex-col items-center justify-center border border-gray-200">
 
                 {/* Profile Image with Hover Upload Icon */}
                 <div className="relative group w-60 h-60 mb-6">
                     <img
                         src={profile.imagePath || profileImageAlt}
                         alt="Profile"
-                        className="w-60 h-60 rounded-full object-cover"
+                        className="w-60 h-60 rounded-full object-cover border border-gray-300"
                     />
                     <div
                         className="absolute inset-0 bg-black bg-opacity-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 cursor-pointer"
                         onClick={handleImageClick}
                     >
-                        {/* Upload Icon (Heroicons style) */}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-10 w-10 text-white"
@@ -97,12 +97,12 @@ const Profile = () => {
                 </div>
 
                 {/* Full Name */}
-                <h1 className="text-4xl text-amber-500 font-bold mb-2">{profile.fullName}</h1>
+                <h1 className="text-4xl text-[#d39e00] font-bold mb-2">{profile.fullName}</h1>
 
                 {/* About Us */}
                 <div className="mt-4 mb-8 px-4 text-center">
-                    <h2 className="text-2xl font-semibold text-gray-700 mb-2">About Us</h2>
-                    <p className="text-gray-600 text-lg">
+                    <h2 className="text-2xl font-semibold text-gray-800 mb-2">About Us</h2>
+                    <p className="text-gray-700 text-lg leading-relaxed max-w-2xl">
                         {profile.aboutUs}
                     </p>
                 </div>
@@ -110,12 +110,13 @@ const Profile = () => {
                 {/* Logout Button */}
                 <p
                     onClick={handleLogout}
-                    className="text-white w-1/3 text-center py-3 px-6 rounded-xl font-bold bg-amber-500 hover:bg-amber-600 cursor-pointer"
+                    className="text-white w-1/3 text-center py-3 px-6 rounded-xl font-semibold bg-[#d39e00] hover:bg-[#b78600] cursor-pointer"
                 >
-                    Logout<CiLogout className="inline ml-2 text-2xl" />
+                    Logout <CiLogout className="inline ml-2 text-2xl"/>
                 </p>
             </div>
         </div>
+
     );
 };
 

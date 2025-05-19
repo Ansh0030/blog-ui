@@ -26,7 +26,7 @@ export default function HomeComp() {
     }, []);
 
     return (
-        <div className="w-full min-h-screen flex flex-col items-center justify-center p-6 ">
+        <div className="w-full min-h-screen flex flex-col items-center justify-center p-6 bg-[#f5f5f0]">
             <div className="w-full space-y-2">
                 {loading
                     ? Array.from({ length: 3 }).map((_, idx) => (
@@ -44,7 +44,7 @@ export default function HomeComp() {
                     : blogs.map((blog) => (
                         <div
                             key={blog._id}
-                            className="border-2 border-dashed border-gray-400 rounded-lg p-6 bg-white shadow-md"
+                            className="border-2 border-dashed border-gray-400 rounded-lg p-6 bg-[#f5f5f0] shadow-md"
                         >
                             <h2 className="text-black text-2xl font-semibold">{blog.title}</h2>
                             <p className="text-gray-800 pt-4 leading-relaxed whitespace-pre-line">{blog.blogText}</p>
