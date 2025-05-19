@@ -84,27 +84,27 @@ export default function ProfilePage() {
 
             {/* Mobile Menu Dropdown */}
             {isMenuOpen && (
-                <div className="absolute top-16 left-0 w-full border-t shadow-md p-4 md:hidden z-50">
+                <div className="absolute top-16 left-0 w-full bg-white border-t shadow-md p-4 md:hidden z-50">
                     <ul className="space-y-2 ">
                         <li
-                            className={`py-2 font-bold hover:bg-[#d39e00] rounded-xl ${
-                                isActive("/home") ? "bg-[#d39e00]" : ""
+                            className={`py-2 font-bold hover:bg-amber-200 rounded-xl ${
+                                isActive("/home") ? "bg-amber-200" : ""
                             }`}
                             onClick={() => handleNavigate("/home")}
                         >
                             Home
                         </li>
                         <li
-                            className={`py-2 font-bold hover:bg-[#d39e00] rounded-xl ${
-                                isActive("/own-blogs") ? "bg-[#d39e00]" : ""
+                            className={`py-2 font-bold hover:bg-amber-200 rounded-xl ${
+                                isActive("/own-blogs") ? "bg-amber-200" : ""
                             }`}
                             onClick={() => handleNavigate("/own-blogs")}
                         >
                             Own Blogs
                         </li>
                         <li
-                            className={`py-2 font-bold bg-[#d39e00] rounded-xl ${
-                                isActive("/profile") ? "bg-[#d39e00]" : ""
+                            className={`py-2 font-bold hover:bg-amber-200 rounded-xl ${
+                                isActive("/profile") ? "bg-amber-200" : ""
                             }`}
                             onClick={() => handleNavigate("/profile")}
                         >
