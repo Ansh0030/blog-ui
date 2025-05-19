@@ -80,20 +80,22 @@ export default function CommentSection({ blogId , toDelete = false }) {
             <h2 className="text-lg font-semibold mb-2">Comment Section</h2>
 
             {!!toDelete && (
-                <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2 mb-4 h-10">
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-wrap gap-2 mb-4"
+                >
                     <input
-                        {...register('text', {required: true})}
+                        {...register("text", {required: true})}
                         placeholder="Write your comment..."
-                        className="flex-1 border-b-gray-500 rounded focus-visible:border-b-gray-500"
+                        className="flex-grow min-w-[200px] px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#d39e00]"
                     />
                     <button
                         type="submit"
                         disabled={!isDirty}
-                        className="text-white w-1/5 h-10 rounded bg-[#d39e00] flex items-center justify-center"
+                        className="text-white px-5 py-2 rounded flex items-center justify-center min-w-[80px]"
                     >
                         Post
                     </button>
-
                 </form>
             )}
 

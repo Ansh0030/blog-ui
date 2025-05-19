@@ -51,7 +51,9 @@ export default function HomeComp() {
                             <h2 className="text-xl text-gray-600 flex justify-end mt-6">
                                 ~{blog.author.name} {blog.author.surname}
                             </h2>
+                            <div className="max-w-full">
                             <CommentSection blogId={blog._id} toDelete={true}></CommentSection>
+                            </div>
                         </div>
                     ))}
             </div>
