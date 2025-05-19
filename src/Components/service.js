@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000"
-const API = "https://blog-backend-45sp.onrender.com";
+const API = "http://localhost:5000"
+const API_URL = "https://blog-backend-45sp.onrender.com";
 
 // Login function
 export const login = async (credentials) => {
@@ -29,11 +29,7 @@ export const logout = async () => {
 
 export const checkAndLoginWithToken = async () => {
   try {
-    const response = await axios.post(
-      `${API_URL}/login`,
-      {},
-      { withCredentials: true }
-    );
+    const response = await axios.get(`${API_URL}/auth`, { withCredentials: true });
     return response.data; // Should include token, message, redirect, etc.
   } catch (error) {
     console.error("Auto-login failed:", error.response?.data || error.message);

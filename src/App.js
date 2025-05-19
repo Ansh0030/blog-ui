@@ -5,28 +5,21 @@ import ProfielPage from "./Components/ProfilePage";
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+import {checkAndLoginWithToken} from "./Components/service";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Auto-login if token is valid
   useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        if (decoded.exp * 1000 > Date.now()) {
-          setIsLoggedIn(true); // ✅ Token is valid, user is logged in
-        } else {
-          Cookies.remove("token"); // ❌ Token expired
-          setIsLoggedIn(false);
-        }
-      } catch (err) {
-        console.error("Invalid token:", err);
-        Cookies.remove("token");
+    // Server-side verification
+    checkAndLoginWithToken().then((res) => {
+      if (res && res.message === "Authenticated") {
+        setIsLoggedIn(true);
+      } else {
         setIsLoggedIn(false);
+        Cookies.remove("token"); // Clean up token if needed
       }
-    }
+    });
   }, []);
 
   const handleLogin = () => {
