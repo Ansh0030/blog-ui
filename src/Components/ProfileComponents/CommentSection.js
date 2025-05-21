@@ -8,8 +8,8 @@ export default function CommentSection({ blogId , toDelete = false }) {
     const [comments, setComments] = useState([]);
     const { userId, username } = useAuth(); // username == userId
 
-    const URL = "https://blog-backend-45sp.onrender.com/comment"
-    const URL_API = "http://localhost:5000/comment"
+    const URL_API = "https://blog-backend-45sp.onrender.com/comment"
+    const URL = "http://localhost:5000/comment"
     // Fetch comments
     useEffect(() => {
         const fetchComments = async () => {
@@ -26,7 +26,7 @@ export default function CommentSection({ blogId , toDelete = false }) {
             }
         };
         fetchComments();
-    }, [blogId]);
+    }, []);
 
     // Delete handler
     const handleDelete = async (commentId) => {
@@ -65,8 +65,8 @@ export default function CommentSection({ blogId , toDelete = false }) {
                 const newComment = result?.comment;
                 if (newComment) {
                     setComments((prev) => [...prev, newComment]);
-                    reset();
                 }
+                reset();
             } else {
                 console.error('Failed to post comment');
             }

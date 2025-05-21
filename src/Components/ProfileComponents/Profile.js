@@ -32,7 +32,7 @@ const Profile = () => {
         };
 
         fetchProfile();
-    }, [username]);
+    }, []);
 
     const handleLogout = async () => {
         // await logout();

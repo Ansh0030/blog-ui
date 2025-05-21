@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const URL = "https://blog-backend-45sp.onrender.com";
-const URL_API = "http://localhost:5000";
+const URL_API = "https://blog-backend-45sp.onrender.com";
+const URL = "http://localhost:5000";
 
 export const uploadImage = async (file, username) => {
     const formData = new FormData();

@@ -34,6 +34,12 @@ export default function LoginPage({ onLogin }) {
 
   const handleSignUP = () => {
     setIsFlipped(!isFlipped);
+    setSignupCred({
+        username: "",
+        password: "",
+        name: "",
+        surname: "",
+    })
   };
 
   const handleFlip = async () => {
