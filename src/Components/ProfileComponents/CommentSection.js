@@ -2,14 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../AuthAPI';
 import { SlTrash } from 'react-icons/sl';
+import { HiInformationCircle } from 'react-icons/hi2';
+import { AiOutlineCheckCircle } from 'react-icons/ai';
 
-export default function CommentSection({ blogId , toDelete = false }) {
+export default function CommentSection({ blogId, toDelete = false }) {
     const { register, handleSubmit, reset, formState: { isDirty } } = useForm();
     const [comments, setComments] = useState([]);
-    const { userId, username } = useAuth(); // username == userId
+    const { userId, username } = useAuth();
 
-    const URL_API = "https://blog-backend-45sp.onrender.com/comment"
-    const URL = "http://localhost:5000/comment"
+    // Alert states
+    const [alertError, setAlertError] = useState(false);
+    const [alertSucc, setAlertSucc] = useState(false);
+    const [content, setContent] = useState("");
+
+    const URL_API = "https://blog-backend-45sp.onrender.com/comment";
+    const URL = "http://localhost:5000/comment";
+
     // Fetch comments
     useEffect(() => {
         const fetchComments = async () => {
@@ -23,10 +31,23 @@ export default function CommentSection({ blogId , toDelete = false }) {
                 }
             } catch (error) {
                 console.error('Failed to load comments:', error);
+                triggerAlert("error", "Failed to load comments");
             }
         };
         fetchComments();
     }, []);
+
+    // Trigger alert helper
+    const triggerAlert = (type, message) => {
+        setContent(message);
+        if (type === "success") {
+            setAlertSucc(true);
+            setTimeout(() => setAlertSucc(false), 5000);
+        } else if (type === "error") {
+            setAlertError(true);
+            setTimeout(() => setAlertError(false), 5000);
+        }
+    };
 
     // Delete handler
     const handleDelete = async (commentId) => {
@@ -37,11 +58,13 @@ export default function CommentSection({ blogId , toDelete = false }) {
 
             if (response.ok) {
                 setComments((prev) => prev.filter((comment) => comment._id !== commentId));
+                triggerAlert("success", "Comment deleted successfully");
             } else {
-                console.error('Failed to delete comment');
+                triggerAlert("error", "Failed to delete comment");
             }
         } catch (error) {
             console.error('Error deleting comment:', error);
+            triggerAlert("error", "Error deleting comment");
         }
     };
 
@@ -67,70 +90,91 @@ export default function CommentSection({ blogId , toDelete = false }) {
                     setComments((prev) => [...prev, newComment]);
                 }
                 reset();
+                triggerAlert("success", "Comment posted successfully");
             } else {
-                console.error('Failed to post comment');
+                triggerAlert("error", "Failed to post comment");
             }
         } catch (error) {
             console.error('Error posting comment:', error);
+            triggerAlert("error", "Error posting comment");
         }
     };
 
     return (
-        <div className="p-4 border rounded bg-white shadow mt-4 max-w-full`">
-            <h2 className="text-lg font-semibold mb-2">Comment Section</h2>
-
-            {!!toDelete && (
-                <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2 mb-4 h-10">
-                    <input
-                        {...register('text', {required: true})}
-                        placeholder="Write your comment..."
-                        className="flex-1 border-b-gray-500 rounded focus-visible:border-b-gray-500"
-                    />
-                    <button
-                        type="submit"
-                        disabled={!isDirty}
-                        className="text-white w-1/5 h-10 rounded bg-[#d39e00] flex items-center justify-center"
-                    >
-                        Post
-                    </button>
-
-                </form>
-            )}
-
-            <div className="space-y-4">
-                {comments.length > 0 ? (
-                    comments.map((comment) => {
-                        const isAuthor = comment?.author?.username === username;
-
-                        return (
-                            <div key={comment._id} className="border-b pb-4 flex items-start gap-3">
-                                {/* Avatar */}
-                                <img
-                                    src={comment?.author?.imageUrl || "/assets/profilePhoto.jpg"}
-                                    alt="User Avatar"
-                                    className="w-10 h-10 rounded-full object-cover"
-                                />
-
-                                <div className="flex-1">
-                                    <div className="flex justify-between items-start">
-                                        <span className="text-lg font-semibold text-gray-900">
-                                            {comment.author?.name} {comment.author?.surname}
-                                        </span>
-                                        {isAuthor && (
-                                            <SlTrash
-                                                onClick={() => handleDelete(comment._id)}
-                                                className="w-5 h-5 cursor-pointer text-red-600 hover:text-red-800"
-                                            />
-                                        )}
-                                    </div>
-                                    <p className="text-sm text-gray-700 mt-1">{comment.text}</p>
-                                </div>
-                            </div>
-                        );
-                    })
-                ) : (
-                    <p className="text-gray-500 text-md px-2">No comments yet.</p>
+        <div className="relative">
+            {/* Alert Box Top-Right */}
+            <div className="fixed top-4 right-4 z-50 space-y-4 w-96 pointer-events-none">
+                {alertError && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded flex items-center shadow-lg pointer-events-auto">
+                        <HiInformationCircle className="mr-2 text-xl" />
+                        <span className="font-medium mr-2">Error:</span>
+                        <span>{content}</span>
+                    </div>
                 )}
+                {alertSucc && (
+                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded flex items-center shadow-lg pointer-events-auto">
+                        <AiOutlineCheckCircle className="mr-2 text-xl" />
+                        <span className="font-medium mr-2">Success:</span>
+                        <span>{content}</span>
+                    </div>
+                )}
+            </div>
+
+            <div className="p-4 border rounded bg-white shadow mt-4 max-w-full">
+                <h2 className="text-lg font-semibold mb-2">Comment Section</h2>
+
+                {!!toDelete && (
+                    <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2 mb-4 h-10">
+                        <input
+                            {...register('text', { required: true })}
+                            placeholder="Write your comment..."
+                            className="flex-1 border-b-gray-500 rounded focus-visible:border-b-gray-500"
+                        />
+                        <button
+                            type="submit"
+                            disabled={!isDirty}
+                            className="text-white w-1/5 h-10 rounded bg-[#d39e00] flex items-center justify-center"
+                        >
+                            Post
+                        </button>
+                    </form>
+                )}
+
+                <div className="space-y-4">
+                    {comments.length > 0 ? (
+                        comments.map((comment) => {
+                            const isAuthor = comment?.author?.username === username;
+
+                            return (
+                                <div key={comment._id} className="border-b pb-4 flex items-start gap-3">
+                                    {/* Avatar */}
+                                    <img
+                                        src={comment?.author?.imageUrl || "/assets/profilePhoto.jpg"}
+                                        alt="User Avatar"
+                                        className="w-10 h-10 rounded-full object-cover"
+                                    />
+
+                                    <div className="flex-1">
+                                        <div className="flex justify-between items-start">
+                                            <span className="text-lg font-semibold text-gray-900">
+                                                {comment.author?.name} {comment.author?.surname}
+                                            </span>
+                                            {isAuthor && (
+                                                <SlTrash
+                                                    onClick={() => handleDelete(comment._id)}
+                                                    className="w-5 h-5 cursor-pointer text-red-600 hover:text-red-800"
+                                                />
+                                            )}
+                                        </div>
+                                        <p className="text-sm text-gray-700 mt-1">{comment.text}</p>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <p className="text-gray-500 text-md px-2">No comments yet.</p>
+                    )}
+                </div>
             </div>
         </div>
     );

@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from "../../AuthAPI";
-import { getImage } from "../../Service/imageService";
-import { uploadImage } from "../../Service/imageService"; // <-- Import your upload function
+import { getImage, uploadImage } from "../../Service/imageService";
 import { useNavigate } from "react-router-dom";
-import {CiLogout} from "react-icons/ci";
-import {logout} from "../service";
+import { CiLogout } from "react-icons/ci";
+import { HiInformationCircle } from "react-icons/hi";
+import { AiOutlineCheckCircle } from "react-icons/ai"; // success icon
+import { logout } from "../service";
 
 const Profile = () => {
     const [profile, setProfile] = useState({
@@ -17,6 +18,11 @@ const Profile = () => {
     const { username } = useAuth();
     const navigate = useNavigate();
 
+    // Alert state
+    const [alertError, setAlertError] = useState(false);
+    const [alertSucc, setAlertSucc] = useState(false);
+    const [content, setContent] = useState("");
+
     useEffect(() => {
         const fetchProfile = async () => {
             try {
@@ -28,6 +34,9 @@ const Profile = () => {
                 });
             } catch (error) {
                 console.error("Error fetching profile data:", error);
+                setAlertError(true);
+                setContent("Failed to load profile data.");
+                setTimeout(() => setAlertError(false), 5000);
             }
         };
 
@@ -53,17 +62,42 @@ const Profile = () => {
                 ...prev,
                 imagePath: data.fileUrl,
             }));
+            setAlertSucc(true);
+            setContent("Profile photo updated successfully!");
+            setTimeout(() => setAlertSucc(false), 5000);
         } catch (error) {
             console.error("Upload failed:", error);
+            setAlertError(true);
+            setContent("Failed to upload image.");
+            setTimeout(() => setAlertError(false), 5000);
         }
     };
 
     const profileImageAlt = "./assets/profilePhoto.jpg";
 
     return (
-        <div className="flex items-center justify-center  min-h-screen px-4">
-            <div
-                className="bg-[#fcfcfa] w-full max-w-5xl h-[90vh] rounded-xl shadow-md p-8 flex flex-col items-center justify-center border border-gray-200">
+        <div className="flex items-center justify-center min-h-screen px-4 relative">
+
+            {/* Alerts in Top Right */}
+            <div className="fixed top-4 right-4 z-50 space-y-4 w-fit pointer-events-none">
+                {alertError && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded flex items-center shadow-lg pointer-events-auto">
+                        <HiInformationCircle className="mr-2 text-xl" />
+                        <span className="font-medium mr-2">Error:</span>
+                        <span>{content}</span>
+                    </div>
+                )}
+                {alertSucc && (
+                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded flex items-center shadow-lg pointer-events-auto">
+                        <AiOutlineCheckCircle className="mr-2 text-xl" />
+                        <span className="font-medium mr-2">Success:</span>
+                        <span>{content}</span>
+                    </div>
+                )}
+            </div>
+
+            {/* Profile Card */}
+            <div className="bg-[#fcfcfa] w-full max-w-5xl h-[90vh] rounded-xl shadow-md p-8 flex flex-col items-center justify-center border border-gray-200">
 
                 {/* Profile Image with Hover Upload Icon */}
                 <div className="relative group w-60 h-60 mb-6">
@@ -112,11 +146,10 @@ const Profile = () => {
                     onClick={handleLogout}
                     className="text-white w-1/3 text-center py-3 px-6 rounded-xl font-semibold bg-[#d39e00] hover:bg-[#b78600] cursor-pointer"
                 >
-                    Logout <CiLogout className="inline ml-2 text-2xl"/>
+                    Logout <CiLogout className="inline ml-2 text-2xl" />
                 </p>
             </div>
         </div>
-
     );
 };
 

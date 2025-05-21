@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.9.0",
     "cross-env": "^7.0.3",
+    "flowbite": "^3.1.2",
+    "flowbite-react": "^0.11.7",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "primeicons": "^7.0.0",
@@ -24,9 +26,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "flowbite-react patch && flowbite-react register"
   },
-  "proxy" : "http://localhost:5000",
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
