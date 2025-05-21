@@ -29,7 +29,6 @@
     "eject": "react-scripts eject",
     "postinstall": "flowbite-react patch && flowbite-react register"
   },
-  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",

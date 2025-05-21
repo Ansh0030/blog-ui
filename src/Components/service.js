@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000"
-const API = "https://blog-backend-45sp.onrender.com";
+const API = "http://localhost:5000"
+const API_URL = "https://blog-backend-45sp.onrender.com";
 
 // Login function
 export const login = async (credentials) => {

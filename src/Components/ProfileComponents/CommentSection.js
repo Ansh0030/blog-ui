@@ -15,8 +15,8 @@ export default function CommentSection({ blogId, toDelete = false }) {
     const [alertSucc, setAlertSucc] = useState(false);
     const [content, setContent] = useState("");
 
-    const URL_API = "https://blog-backend-45sp.onrender.com/comment";
-    const URL = "http://localhost:5000/comment";
+    const URL = "https://blog-backend-45sp.onrender.com/comment";
+    const URL_API = "http://localhost:5000/comment";
 
     // Fetch comments
     useEffect(() => {
