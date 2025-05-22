@@ -6,7 +6,7 @@ import { HiInformationCircle } from 'react-icons/hi2';
 import { AiOutlineCheckCircle } from 'react-icons/ai';
 
 export default function CommentSection({ blogId, toDelete = false }) {
-    const { register, handleSubmit, reset, formState: { isDirty } } = useForm();
+    const { register, handleSubmit, reset, formState: { isDirty,errors} } = useForm();
     const [comments, setComments] = useState([]);
     const { userId, username } = useAuth();
 
@@ -102,18 +102,20 @@ export default function CommentSection({ blogId, toDelete = false }) {
 
     return (
         <div className="relative">
-            {/* Alert Box Top-Right */}
+            {/* 🔔 Alert Box Top-Right */}
             <div className="fixed top-4 right-4 z-50 space-y-4 w-96 pointer-events-none">
                 {alertError && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded flex items-center shadow-lg pointer-events-auto">
-                        <HiInformationCircle className="mr-2 text-xl" />
+                    <div
+                        className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded flex items-center shadow-lg pointer-events-auto">
+                        <HiInformationCircle className="mr-2 text-xl"/>
                         <span className="font-medium mr-2">Error:</span>
                         <span>{content}</span>
                     </div>
                 )}
                 {alertSucc && (
-                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded flex items-center shadow-lg pointer-events-auto">
-                        <AiOutlineCheckCircle className="mr-2 text-xl" />
+                    <div
+                        className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded flex items-center shadow-lg pointer-events-auto">
+                        <AiOutlineCheckCircle className="mr-2 text-xl"/>
                         <span className="font-medium mr-2">Success:</span>
                         <span>{content}</span>
                     </div>
@@ -124,20 +126,36 @@ export default function CommentSection({ blogId, toDelete = false }) {
                 <h2 className="text-lg font-semibold mb-2">Comment Section</h2>
 
                 {!!toDelete && (
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2 mb-4 h-10">
-                        <input
-                            {...register('text', { required: true })}
-                            placeholder="Write your comment..."
-                            className="flex-1 border-b-gray-500 rounded focus-visible:border-b-gray-500"
-                        />
-                        <button
-                            type="submit"
-                            disabled={!isDirty}
-                            className="text-white w-1/5 h-10 rounded bg-[#d39e00] flex items-center justify-center"
-                        >
-                            Post
-                        </button>
+                    <form onSubmit={handleSubmit(onSubmit)} className="mb-4">
+                        <div className="flex gap-2 items-start">
+                            <input
+                                {...register("text", {
+                                    required: "Comment is required",
+                                    validate: (value) =>
+                                        !value || !value.trim()
+                                            ? "Comment cannot be empty or only spaces"
+                                            : true,
+                                })}
+                                placeholder="Write your comment..."
+                                className={`flex-1 h-10 px-3 border rounded focus:outline-none focus:ring-2 ${
+                                    errors.text
+                                        ? "border-red-500 focus:ring-red-500"
+                                        : "border-gray-300 focus:ring-[#d39e00]"
+                                }`}
+                            />
+                            <button
+                                type="submit"
+                                disabled={!isDirty}
+                                className="text-white w-1/5 px-4 h-10 rounded flex items-center justify-center disabled:opacity-50"
+                            >
+                                Post
+                            </button>
+                        </div>
+                        {errors.text && (
+                            <span className="text-red-500 text-sm mt-1 block">{errors.text.message}</span>
+                        )}
                     </form>
+
                 )}
 
                 <div className="space-y-4">
@@ -156,9 +174,9 @@ export default function CommentSection({ blogId, toDelete = false }) {
 
                                     <div className="flex-1">
                                         <div className="flex justify-between items-start">
-                                            <span className="text-lg font-semibold text-gray-900">
-                                                {comment.author?.name} {comment.author?.surname}
-                                            </span>
+                      <span className="text-lg font-semibold text-gray-900">
+                        {comment.author?.name} {comment.author?.surname}
+                      </span>
                                             {isAuthor && (
                                                 <SlTrash
                                                     onClick={() => handleDelete(comment._id)}

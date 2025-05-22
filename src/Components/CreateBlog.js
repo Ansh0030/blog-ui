@@ -8,7 +8,7 @@ import { HiInformationCircle } from "react-icons/hi2";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
 export default function CreateBlog() {
-    const { register, handleSubmit, formState: { isDirty }, reset } = useForm();
+    const { register, handleSubmit, formState: { isDirty,errors }, reset } = useForm();
     const [data, setData] = useState(null);
     const { username } = useAuth();
     const navigate = useNavigate();
@@ -45,22 +45,25 @@ export default function CreateBlog() {
             {/* 🔔 Alert box */}
             <div className="fixed top-4 right-4 z-50 space-y-4 w-96 pointer-events-none">
                 {alertType === 'error' && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded flex items-center shadow-md pointer-events-auto">
-                        <HiInformationCircle className="mr-2 text-xl" />
+                    <div
+                        className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded flex items-center shadow-md pointer-events-auto">
+                        <HiInformationCircle className="mr-2 text-xl"/>
                         <span className="font-semibold mr-2">Error:</span>
                         <span>{alertMessage}</span>
                     </div>
                 )}
                 {alertType === 'success' && (
-                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded flex items-center shadow-md pointer-events-auto">
-                        <AiOutlineCheckCircle className="mr-2 text-xl" />
+                    <div
+                        className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded flex items-center shadow-md pointer-events-auto">
+                        <AiOutlineCheckCircle className="mr-2 text-xl"/>
                         <span className="font-semibold mr-2">Success:</span>
                         <span>{alertMessage}</span>
                     </div>
                 )}
                 {alertType === 'info' && (
-                    <div className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded flex items-center shadow-md pointer-events-auto">
-                        <HiInformationCircle className="mr-2 text-xl" />
+                    <div
+                        className="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded flex items-center shadow-md pointer-events-auto">
+                        <HiInformationCircle className="mr-2 text-xl"/>
                         <span className="font-semibold mr-2">Info:</span>
                         <span>{alertMessage}</span>
                     </div>
@@ -81,26 +84,42 @@ export default function CreateBlog() {
                             className="flex items-center gap-1 text-[#d39e00] cursor-pointer hover:text-[#b78600] hover:underline"
                             onClick={() => reset()}
                         >
-                            <FiRotateCw />
+                            <FiRotateCw/>
                             <span>Reset</span>
                         </div>
                     </div>
                     <input
-                        className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#d39e00] bg-white text-gray-800"
+                        className={`w-full p-3 rounded-lg border bg-white text-gray-800 focus:outline-none focus:ring-2 
+                            ${errors.title ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-[#d39e00]'}`}
                         type="text"
-                        {...register("title", { required: true })}
+                        {...register("title", {
+                            required: "Title is required",
+                            validate: (value) =>
+                                !value || !value.trim()
+                                    ? "Title cannot be empty or contain only spaces"
+                                    : true,
+                        })}
                         placeholder="Enter the title of your blog"
                     />
+                    {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
                 </div>
 
                 {/* Blog Content */}
                 <div className="w-full">
                     <label className="block font-semibold mb-1 text-gray-800">Content</label>
                     <textarea
-                        className="w-full h-40 p-3 rounded-lg border border-gray-300 resize-none focus:outline-none focus:ring-2 focus:ring-[#d39e00] bg-white text-gray-800"
-                        {...register("blogText", { required: true })}
+                        className={`w-full h-40 p-3 rounded-lg border resize-none bg-white text-gray-800 focus:outline-none focus:ring-2 
+                            ${errors.blogText ? 'border-red-500 focus:ring-red-500' : 'border-gray-300 focus:ring-[#d39e00]'}`}
+                        {...register("blogText", {
+                            required: "Content is required",
+                            validate: (value) =>
+                                !value || !value.trim()
+                                    ? "Content cannot be empty or contain only spaces"
+                                    : true,
+                        })}
                         placeholder="Write your blog content here..."
                     ></textarea>
+                    {errors.blogText && <p className="text-red-500 text-sm mt-1">{errors.blogText.message}</p>}
                 </div>
 
                 {/* Submit Button */}
