@@ -88,7 +88,12 @@ export default function CreateBlog() {
                     <input
                         className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#d39e00] bg-white text-gray-800"
                         type="text"
-                        {...register("title", { required: true })}
+                        {...register("title", { required: true,validate: (value) => {
+                                if (!value || !value.trim()) {
+                                    return "Name cannot be empty or contain only spaces";
+                                }
+                                return true;
+                            }, })}
                         placeholder="Enter the title of your blog"
                     />
                 </div>
@@ -98,7 +103,12 @@ export default function CreateBlog() {
                     <label className="block font-semibold mb-1 text-gray-800">Content</label>
                     <textarea
                         className="w-full h-40 p-3 rounded-lg border border-gray-300 resize-none focus:outline-none focus:ring-2 focus:ring-[#d39e00] bg-white text-gray-800"
-                        {...register("blogText", { required: true })}
+                        {...register("blogText", { required: true ,validate: (value) => {
+                                if (!value || !value.trim()) {
+                                    return "Name cannot be empty or contain only spaces";
+                                }
+                                return true;
+                            }, })}
                         placeholder="Write your blog content here..."
                     ></textarea>
                 </div>

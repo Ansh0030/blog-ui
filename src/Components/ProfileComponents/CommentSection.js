@@ -126,7 +126,12 @@ export default function CommentSection({ blogId, toDelete = false }) {
                 {!!toDelete && (
                     <form onSubmit={handleSubmit(onSubmit)} className="flex gap-2 mb-4 h-10">
                         <input
-                            {...register('text', { required: true })}
+                            {...register('text', { required: true,validate: (value) => {
+                                    if (!value || !value.trim()) {
+                                        return "Name cannot be empty or contain only spaces";
+                                    }
+                                    return true;
+                                }, })}
                             placeholder="Write your comment..."
                             className="flex-1 border-b-gray-500 rounded focus-visible:border-b-gray-500"
                         />
